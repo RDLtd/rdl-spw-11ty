@@ -5,6 +5,26 @@
 body { background-color: $color-primary; }
 main { background-color: $color-body-bgd; }
 
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
 footer {
   $link-height: 3rem;
   background-color: $color-primary-dark;
@@ -30,23 +50,6 @@ footer {
     }
   }
 
-  button {
-    //background: 0;
-    //border-radius: 8px;
-    //border: 2px solid $color-nav-label;
-    //font-size: 1.1rem;
-    //letter-spacing: 1px;
-    //color: $color-nav-label;
-    //cursor: pointer;
-    //padding: 1rem;
-    //white-space: nowrap;
-    //transition: all .3s ease-out;
-    //&:hover {
-    //  color: $color-black;
-    //  background-color: $color-nav-label;
-    //}
-  }
-
   .logo {
     display: inline;
     height: 1.6rem; //$link-height;
@@ -68,6 +71,15 @@ footer {
   }
 }
 
+@keyframes grow {
+  0% {
+    scale: 1;
+  }
+  100% {
+    scale: 1.5;
+  }
+}
+
 .section-hero {
   height: 100vh;
   display: grid;
@@ -76,6 +88,7 @@ footer {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
   }
+
   > img {
     position: fixed;
     inset: 0 0 0 0;
@@ -83,6 +96,8 @@ footer {
     height: inherit;
     width: 100vw;
     object-fit: cover;
+    animation: grow linear;
+    animation-timeline: scroll() !important;
   }
   // For non-member templates
   &.golden-ratio {
@@ -94,7 +109,7 @@ footer {
     }
   }
   .brand-container {
-    margin-top: -10%;
+    margin-top: -50px;
     display: grid;
     place-items: center;
     font-family: $font-family-display;
@@ -179,6 +194,7 @@ footer {
   }
 }
 .venue-logo-mask {
+
   background-color: white;
   mask-repeat: no-repeat;
   mask-size: contain;
@@ -187,6 +203,11 @@ footer {
   width: 50%;
   max-width: 400px;
   max-height: 200px;
+  &.venue-header {
+    height: 48px;
+    max-width: 200px;
+    max-height: 100px;
+  }
 }
 
 
@@ -295,6 +316,7 @@ dd {
       transition: all .3s ease-in-out;
       &:hover, &:focus-visible {
         background-color: $color-cta-bgd-dark;
+        transform: translateY(-2px);
         //box-shadow: $shadow;
       }
     }
