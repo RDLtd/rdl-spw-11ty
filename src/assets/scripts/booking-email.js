@@ -9,6 +9,15 @@ export default function (){
     return false;
   }
 
+  // Is this an iOS device?
+  const iOS = /iPad|iPhone/.test(navigator.userAgent);
+
+  if (/iPad|iPhone/.test(navigator.userAgent)) {
+    console.log("This is an iOS device.");
+  } else {
+    console.log("This is not an iOS device!");
+  }
+
   // Element references
   const body = document.querySelector('body');
   const htmlLang = document.querySelector('html').getAttribute('lang') || 'en';
@@ -186,11 +195,12 @@ export default function (){
 
     // Use 3rd party datepicker as Safari
     // doesn't support the Html5 default picker
+
     flatpickr(bkgDate, {
       dateFormat: 'D d M Y',
       defaultDate: 'today',
       minDate: 'today',
-      maxDate: new Date().fp_incr(bkgAdvDays),
+      maxDate: iOS ? null : new Date().fp_incr(bkgAdvDays),
       monthSelectorType: 'static',
       disableMobile: "false",
       locale: htmlLang === 'fr' ? French : 'en',

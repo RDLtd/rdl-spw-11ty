@@ -22,7 +22,8 @@ brand:
 
 <!-- global nav -->
 <nav id="navBar" aria-label="primary">
-    <a href="#" class="brand" aria-label="{{ nav.label.backToTop }}">
+    <a href="/" class="brand" aria-label="{{ nav.label.backToTop }}">
+
         <h1>{{ data.name }}</h1>
     </a>
     <ul class="nav-list-mobile" role="list">
@@ -32,14 +33,17 @@ brand:
 
 <!-- HERO -->
 <section id="hero" class="section-hero">
+
     {{> partials/brand }}
     {{> partials/hero-image }}
+
 </section>
 
 <main id="home">
     <!-- ABOUT -->
     <section id="about" class="content-section" aria-label="introduction">
         <div class="content-block">
+
             <div class="description" aria-label="description">
                 <p>{{ data.description.full }}</p>
                 <!-- feature tags-->
@@ -73,11 +77,11 @@ brand:
 
     </section>
 
-
-
     {{> partials/menus }}
 
     {{> partials/menu-downloads }}
+
+    {{> partials/takeaway }}
 
     {{> partials/events }}
 
