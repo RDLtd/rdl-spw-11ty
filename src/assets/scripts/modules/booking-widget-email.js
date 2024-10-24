@@ -36,7 +36,7 @@ console.log('API', api);
  */
 export default function (config){
 
-  console.log('Dataset', config);
+  // console.log('Dataset', config);
 
   // Abort if there's no widget
   if(!config.provider) {
@@ -198,7 +198,7 @@ export default function (config){
       }
 
       // Display the modal
-      modal.open();
+      modal.open(config.provider);
       // Set input focus
       setTimeout(() => {
         document.getElementById('full_name').focus();
@@ -247,16 +247,19 @@ export default function (config){
         if (!response.ok) {
           // get error message from body or default to response status
           const error = (response.message) || response.status;
-          return Promise.reject(error);
+          return Promise.reject(response);
         }
         // Analytics
-        gtag('event', 'booking_request_sent', { 'provider': 'email'});
+        gtag('event', 'booking_request_sent', {
+          'provider': config.provider,
+          'covers': Number(document.getElementById('selectCovers').value)
+        });
 
         // Display success message
         dspThankYouMessage();
       })
       .catch(error => {
-        console.log(`Error: ${error}`);
+        console.error(error);
       });
   }
 
@@ -346,6 +349,7 @@ export default function (config){
     for (let i = 1; i <= bkgMaxCovers; i++) {
       let opt = document.createElement('option');
       opt.innerHTML = `${i} ${people}`;
+      opt.value = `${i}`;
       if (i === 1) { opt.innerHTML = `${i} ${person}`; }
       if (i === 2) { opt.selected = true; }
       options.appendChild(opt);
